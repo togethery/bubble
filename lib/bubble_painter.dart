@@ -4,9 +4,9 @@ part of 'bubble.dart';
 class BubblePainter extends CustomPainter {
   BubblePainter({
     required this.clipper,
-    required Color color,
-    required Color borderColor,
-    required double borderWidth,
+    required this.color,
+    required this.borderColor,
+    required this.borderWidth,
     required this.borderUp,
     required this.elevation,
     required this.shadowColor,
@@ -30,6 +30,10 @@ class BubblePainter extends CustomPainter {
   final Paint _fillPaint;
   final Paint? _strokePaint;
 
+  final Color color;
+  final Color borderColor;
+  final double borderWidth;
+
   @override
   void paint(Canvas canvas, Size size) {
     final clip = clipper.getClip(size);
@@ -48,5 +52,12 @@ class BubblePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant BubblePainter oldDelegate) => false;
+  bool shouldRepaint(covariant BubblePainter oldDelegate) =>
+      oldDelegate.clipper != clipper ||
+      oldDelegate.color != color ||
+      oldDelegate.borderColor != borderColor ||
+      oldDelegate.borderWidth != borderWidth ||
+      oldDelegate.borderUp != borderUp ||
+      oldDelegate.elevation != elevation ||
+      oldDelegate.shadowColor != shadowColor;
 }
